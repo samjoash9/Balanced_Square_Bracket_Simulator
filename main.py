@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter.font import Font
-from balanced_bracket import rightmost_derivation, leftmost_derivation
+from balanced_bracket import rightmost_derivation, leftmost_derivation, build_parse_tree
 
 # Color scheme
 BG_COLOR = "#f5f5f5"
@@ -131,36 +131,6 @@ def show_parse_tree():
     except Exception as e:
         messagebox.showerror("Error", f"Could not build parse tree:\n{str(e)}")
         status_label.config(text=f"Error: {str(e)}", foreground=ERROR_COLOR)
-
-def build_parse_tree(s):
-    class TreeNode:
-        def __init__(self, label):
-            self.label = label
-            self.children = []
-
-    def helper(sub):
-        if not sub:
-            return TreeNode("ε")
-
-        if sub[0] == '[':
-            depth = 0
-            for i in range(len(sub)):
-                if sub[i] == '[':
-                    depth += 1
-                elif sub[i] == ']':
-                    depth -= 1
-                if depth == 0:
-                    inner = sub[1:i]
-                    rest = sub[i+1:]
-                    node = TreeNode("S")
-                    node.children.append(TreeNode("["))
-                    node.children.append(helper(inner))
-                    node.children.append(TreeNode("]"))
-                    node.children.append(helper(rest))
-                    return node
-        return TreeNode("INVALID")
-
-    return helper(s)
 
 # --- Main GUI Setup ---
 root = tk.Tk()
