@@ -1,2 +1,2 @@
-balanced_bracket.py - contains the main logic for leftmost and rightmost derivation.
-main.py - contains the main logic for the parse tree and the main driver of the simulator. 
+balanced_bracket.py - contains the main logic for leftmost derivation, rightmost derivation, and the parse tree
+main.py - the main driver of the simulator. 
